@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from . models import *
+from django.db.models import Count
 # Create your views here.
 def index(request):
     post = Blog.objects.order_by('-id')
     Main_post = Blog.objects.order_by('-id').filter(main_post=True)[0:1]
     latest = Blog.objects.all().order_by('-date')[0:5]
-    recent = Blog.objects.filter(section='Recent').order_by('-id')[:5]
-    popular = Blog.objects.filter(section="Trending").order_by('id')[0:5]
-    cat = Category.objects.all()
+    recent = Blog.objects.all().order_by('-date')[0:5]
+    popular = Blog.objects.filter(section="Trending").order_by('id')[0:3]
+    cat = Category.objects.annotate(post_count=Count('category'))
     
     context = {
         'post' : post,
