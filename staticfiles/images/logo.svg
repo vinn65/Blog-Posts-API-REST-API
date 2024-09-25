@@ -1,0 +1,18 @@
+<svg width="118" height="26" viewBox="0 0 118 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0)">
+      <!-- First letter V -->
+      <path d="M10 25L5 5L0 25H10Z" fill="#203656"/>
+      <!-- First letter M -->
+      <path d="M15 25V5L20 15L25 5V25H20V10L15 20V25Z" fill="#203656"/>
+      <!-- Second letter M -->
+      <path d="M30 25V5L35 15L40 5V25H35V10L30 20V25Z" fill="#203656"/>
+      <!-- Small bright pink circle -->
+      <circle cx="111" cy="21" r="4" fill="#FE4F70"/>
+    </g>
+    <defs>
+      <clipPath id="clip0">
+        <rect width="118" height="26" fill="white"/>
+      </clipPath>
+    </defs>
+</svg>
+  
