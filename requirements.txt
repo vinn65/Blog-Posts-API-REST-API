@@ -1,3 +1,9 @@
-django
-djangorestframework
-environs
+asgiref
+Django
+django-autoslug
+pillow
+sqlparse
+tzdata
+textwrap 
+pillow
+rest_framework
