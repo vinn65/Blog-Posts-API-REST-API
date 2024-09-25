@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-i35=%=9v%t9(x*!v_r)!_^yl&av*-b*!p9lp%e5=kxy&-6nh#("
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['blog-posts-api-rest-api-t54y.vercel.app']
+ALLOWED_HOSTS = []
 
 
 
@@ -86,6 +86,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+import dj_database_url
 
 
 # Password validation

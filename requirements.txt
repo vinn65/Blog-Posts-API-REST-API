@@ -5,3 +5,6 @@ pillow
 sqlparse
 tzdata
 pillow
+gunicorn
+django-database-url
+psycopg2
