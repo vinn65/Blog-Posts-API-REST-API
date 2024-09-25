@@ -5,4 +5,3 @@ pillow
 sqlparse
 tzdata
 pillow
-rest_framework
