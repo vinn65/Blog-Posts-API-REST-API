@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from . models import *
 from django.db.models import Count
 # Create your views here.
@@ -24,10 +24,12 @@ def index(request):
 def blog_detail(request, slug):
     category = Category.objects.all()
     post = get_object_or_404(Blog, blog_slug = slug)
+    comments = Comment.objects.filter(blog_id = post.id).order_by('-date')
 
     context = {
         "category":category,
-        "post":post
+        "post":post,
+        'comments':comments
     }
 
     return render(request, 'blog_detail.html', context)
@@ -43,3 +45,28 @@ def category(request, slug):
 
         
        return render(request, 'category.html', context)
+
+def add_comment(request,slug):
+     
+    if request.method == 'POST':
+        post = get_object_or_404(Blog, blog_slug = slug)
+        name = request.POST.get('InputName')
+        email = request.POST.get('InputEmail')
+        website = request.POST.get('InputWeb')
+        comment_text = request.POST.get('InputComment')
+        parent_id = request.POST.get('parent_id')
+        parent_comment = None
+        
+        if parent_id:
+            parent_comment = get_object_or_404(Comment, id=parent_id)
+
+        Comment.objects.create(
+            post= post,
+            name=name,
+            email=email,
+            website=website,
+            comment=comment_text,
+            parent=parent_comment
+        )
+        return redirect("blog_detail",slug=post.blog_slug)
+    return redirect('blog_detail')

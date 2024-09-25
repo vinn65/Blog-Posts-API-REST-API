@@ -3,6 +3,7 @@ from autoslug import AutoSlugField
 from django.utils.text import slugify
 import textwrap  # For generating clean excerpts
 # Create your models here.
+from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -45,3 +46,24 @@ class Blog(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.category.name}) ({self.id})"
+    
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    post = models.ForeignKey(Blog, related_name='comments', on_delete=models.CASCADE)
+    blog_id = models.IntegerField(blank=True, null=True)  # Add this field to store the Blog ID
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    website = models.URLField(blank=True, null=True)
+    comment = models.TextField()
+    date = models.DateTimeField(default=timezone.now)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+
+    def save(self, *args, **kwargs):
+        # Automatically set the blog_id when saving a comment
+        if self.post:
+            self.blog_id = self.post.id
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Comment ID {self.id} on Blog Post ID {self.blog_id} by {self.name}: {self.comment[:20]}'

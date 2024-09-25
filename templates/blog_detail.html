@@ -97,6 +97,7 @@
 
 					<!-- section header -->
 					<div class="section-header">
+					
 						<h3 class="section-title">Comments ({{comments.count}})</h3>
 						<img src="{% static 'images/wave.svg'%}" class="wave" alt="wave" />
 					</div>
@@ -131,7 +132,7 @@
 					<!-- comment form -->
 					<div class="comment-form rounded bordered padding-30">
 
-						<form id="comment-form" class="comment-form" method="post" action="{% url 'blog_detail' post.blog_slug %}">
+						<form id="comment-form" class="comment-form" method="post" action="{% url 'add_comment' post.blog_slug %}">
 							<div class="messages"></div>
 							{% csrf_token %}
 						
@@ -180,7 +181,7 @@
 					<div class="sidebar">
 						<!-- widget about -->
 						<div class="widget rounded">
-							<div class="widget-about data-bg-image text-center" data-bg-image="{% static "images/map-bg.png"%}">
+							<div class="widget-about data-bg-image text-center" data-bg-image="{% static 'images/map-bg.png' %}">
 								<img src="{% static 'images/logo.svg'%}" alt="logo" class="mb-4" />
 								<p class="mb-4">Hello, We’re content writers who are fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
 								<ul class="social-icons list-unstyled list-inline mb-0">
@@ -271,7 +272,7 @@
 											<a href="category.html" class="category-badge position-absolute">How to</a>
 											<a href="">
 												<div class="inner">
-													<img src="images/widgets/widget-carousel-1.jpg" alt="post-title" />
+													<img src="{% static 'images/widgets/widget-carousel-1.jpg' %}" alt="post-title" />
 												</div>
 											</a>
 										</div>
