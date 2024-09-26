@@ -19,7 +19,7 @@ def index(request):
         'latest':latest,
 
     }
-    return render(request, "ty.html", context)
+    return render(request, "index.html", context)
 
 def blog_detail(request, slug):
     category = Category.objects.all()
@@ -34,17 +34,31 @@ def blog_detail(request, slug):
 
     return render(request, 'blog_detail.html', context)
 
-def category(request, slug):
-       blog_cat = Category.objects.all()
-       cat = Category.objects.filter(slug=slug)
-       context = {
-       'cat' : cat,    
-       'blog_cat' : blog_cat,              
-       'active_category' :slug,
-       }
+# def category(request, slug):
+#        blog_cat = Category.objects.all()
+#        cat = Category.objects.filter(slug=slug)
+#        context = {
+#        'cat' : cat,    
+#        'blog_cat' : blog_cat,              
+#        'active_category' :slug,
+#        }
 
         
-       return render(request, 'category.html', context)
+#        return render(request, 'ty.html', context)
+
+def category(request, slug):
+    active_category = get_object_or_404(Category, slug=slug)
+    blogs_in_category = Blog.objects.filter(category=active_category).order_by('-date')
+    blog_cat = Category.objects.all()
+
+    context = {
+        'cat': active_category,
+        'blogs_in_category': blogs_in_category,
+        'blog_cat': blog_cat,
+        'active_category': slug, 
+    }
+
+    return render(request, 'ty.html', context)
 
 def add_comment(request,slug):
      
